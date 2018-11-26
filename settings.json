@@ -4,5 +4,7 @@
     "width": 840,
     "height": 640
   },
-  "backgroundColor": [0, 0, 0]
+  "renderSettings":{
+    "backgroundColor": [0, 0, 0]
+  }
 }
