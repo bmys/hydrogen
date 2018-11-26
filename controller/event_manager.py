@@ -1,5 +1,6 @@
 from pygame import Surface
 import pygame
+from collections import defaultdict
 
 
 class EventManager:
@@ -13,7 +14,9 @@ class EventManager:
 
         self.screen = screen
         self.color = render_settings['backgroundColor']
+        self.event_dict = defaultdict(list)
 
     def event(self):
-        self.screen.fill(self.color)
-        pygame.display.flip()
+        event = pygame.event.get()
+        for subscriber in self.event_dict[event]:
+            subscriber.event(event)
