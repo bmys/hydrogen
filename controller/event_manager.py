@@ -4,7 +4,7 @@ from collections import defaultdict
 
 
 class EventManager:
-    def __init__(self, screen: Surface, render_settings: dict):
+    def __init__(self):
         """
         Event manager is responsible for operate event calls.
 
@@ -12,11 +12,12 @@ class EventManager:
         :param render_settings:
         """
 
-        self.screen = screen
-        self.color = render_settings['backgroundColor']
         self.event_dict = defaultdict(list)
 
     def event(self):
         event = pygame.event.get()
         for subscriber in self.event_dict[event]:
             subscriber.event(event)
+
+    def add(self, event, delegate):
+        self.event_dict[event].append(delegate)
