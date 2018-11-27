@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 import pygame
 from loader.load_json_settings import load_setting
 from view.render_manager import RenderManager
@@ -28,9 +29,6 @@ class Game:
         while self.running:
             self.renderer.render()
             self.event_manager.event()
-            idx += 1
-            if idx == 4000:
-                return
 
     def exit(self):
         self.running = False
