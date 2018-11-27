@@ -1,6 +1,7 @@
 import pygame
 from loader.load_json_settings import load_setting
 from view.render_manager import RenderManager
+from controller.event_manager import EventManager
 
 
 class Game:
@@ -17,16 +18,22 @@ class Game:
         pygame.display.set_caption(title)
         self.screen = pygame.display.set_mode(window_size)
         self.running = False
-        self.render = RenderManager(self.screen, settings['renderSettings'])
+        self.renderer = RenderManager(self.screen, settings['renderSettings'])
+        self.event_manager = EventManager()
 
     def run(self):
+        self.event_manager.add(pygame.QUIT, self.exit)
         self.running = True
         idx = 0
         while self.running:
-            self.render.render()
+            self.renderer.render()
+            self.event_manager.event()
             idx += 1
             if idx == 4000:
                 return
+
+    def exit(self):
+        self.running = False
 
 
 if __name__ == '__main__':

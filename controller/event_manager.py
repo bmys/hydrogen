@@ -15,9 +15,11 @@ class EventManager:
         self.event_dict = defaultdict(list)
 
     def event(self):
-        event = pygame.event.get()
-        for subscriber in self.event_dict[event]:
-            subscriber.event(event)
+        events = pygame.event.get()
+        for event in events:
+            for delegate in self.event_dict[event.type]:
+                delegate()
 
     def add(self, event, delegate):
         self.event_dict[event].append(delegate)
+
