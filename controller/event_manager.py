@@ -8,8 +8,6 @@ class EventManager:
         """
         Event manager is responsible for operate event calls.
 
-        :param screen:
-        :param render_settings:
         """
 
         self.event_dict = defaultdict(list)
@@ -17,8 +15,12 @@ class EventManager:
     def event(self):
         events = pygame.event.get()
         for event in events:
-            for delegate in self.event_dict[event.type]:
-                delegate()
+            if event.type == pygame.KEYDOWN:
+                for delegate in self.event_dict[event.key]:
+                    delegate()
+            else:
+                for delegate in self.event_dict[event.type]:
+                    delegate()
 
     def add(self, event, delegate):
         self.event_dict[event].append(delegate)
