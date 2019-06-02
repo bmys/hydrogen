@@ -4,7 +4,12 @@
     "width": 840,
     "height": 640
   },
+
   "renderSettings":{
     "backgroundColor": [255, 0, 0]
+  },
+
+  "eventSettings":{
+    "requiredEvents":[]
   }
 }
