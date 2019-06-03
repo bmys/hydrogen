@@ -10,6 +10,18 @@ class EventManager:
 
     """
 
+    class KeyboardEvents:
+        def __init__(self):
+            # Event type, key code, events
+            self.key_events = defaultdict(lambda: defaultdict(list))
+
+        def add(self, event_type, key, delegate):
+            weak_ref = weakref.ref(delegate)
+            self.key_events[event_type][key].append(weak_ref)
+
+        def remove(self, event_type, key, delegate):
+            self.key_events[event_type][key].pop(delegate)
+
     def __init__(self):
         self.event_dict = defaultdict(list)
 
@@ -43,5 +55,3 @@ def block(event_type):
 
 def allow(event_type):
     pygame.event.set_allowed(event_type)
-
-
